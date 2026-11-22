@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#164b35" />
+    <title>Korbo — Grocery planning made simple</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="Korbo home">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M12 21V10m0 4c-4.2 0-7-2.5-7-6.5 4.2 0 7 2.5 7 6.5Zm0-3.5c0-3.8 2.8-6.3 7-6.5 0 4-2.8 6.5-7 6.5Z"/></svg>
+        </span>
+        <span>korbo</span>
+      </a>
+      <button class="profile-button" type="button" aria-label="Open profile">
+        <span>AK</span>
+      </button>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div>
+          <p class="eyebrow">WEEKLY GROCERY PLAN</p>
+          <h1>Plan smarter.<br /><em>Eat better.</em></h1>
+        </div>
+        <p class="hero-copy">A balanced grocery basket tailored to your household, budget and week.</p>
+      </section>
+
+      <section class="planner" aria-label="Grocery planning controls">
+        <div class="control-grid">
+          <fieldset class="market-control">
+            <legend>Choose a supermarket</legend>
+            <div class="market-options" id="marketOptions">
+              <button class="market-chip active" type="button" data-market="Lidl" aria-pressed="true">
+                <span class="market-logo lidl">LIDL</span>
+              </button>
+              <button class="market-chip" type="button" data-market="Aldi" aria-pressed="false">
+                <span class="market-logo aldi">ALDI</span>
+              </button>
+              <button class="market-chip" type="button" data-market="Rewe" aria-pressed="false">
+                <span class="market-logo rewe">REWE</span>
+              </button>
+              <button class="market-chip" type="button" data-market="Edeka" aria-pressed="false">
+                <span class="market-logo edeka">EDEKA</span>
+              </button>
+              <button class="market-chip" type="button" data-market="Kaufland" aria-pressed="false">
+                <span class="market-logo kaufland">Kaufland</span>
+              </button>
+            </div>
+          </fieldset>
+
+          <div class="input-control">
+            <label for="budget">Weekly budget</label>
+            <div class="number-wrap budget-wrap">
+              <span>€</span>
+              <input id="budget" type="number" min="10" max="500" step="5" value="80" />
+            </div>
+          </div>
+
+          <div class="input-control">
+            <span class="control-label">People</span>
+            <div class="stepper" data-control="people">
+              <button type="button" data-step="-1" aria-label="Decrease people">−</button>
+              <output id="people" aria-live="polite">2</output>
+              <button type="button" data-step="1" aria-label="Increase people">+</button>
+            </div>
+          </div>
+
+          <div class="input-control">
+            <span class="control-label">Days</span>
+            <div class="stepper" data-control="days">
+              <button type="button" data-step="-1" aria-label="Decrease days">−</button>
+              <output id="days" aria-live="polite">7</output>
+              <button type="button" data-step="1" aria-label="Increase days">+</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="results" aria-live="polite">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">YOUR PLAN</p>
+            <h2>Recommended basket</h2>
+          </div>
+          <button class="reset-button" id="resetButton" type="button">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11a8 8 0 1 0-2.34 5.66M20 11V5m0 6h-6"/></svg>
+            Reset
+          </button>
+        </div>
+
+        <div class="summary">
+          <div class="summary-main">
+            <span>Estimated total</span>
+            <strong id="totalPrice">€0.00</strong>
+          </div>
+          <div class="budget-progress">
+            <div class="progress-meta">
+              <span id="budgetUsed">0% of budget</span>
+              <span id="remainingBudget">€0.00 left</span>
+            </div>
+            <div class="progress-track"><div id="progressBar"></div></div>
+          </div>
+        </div>
+
+        <div class="basket-layout">
+          <div class="basket-list" id="basketList"></div>
+          <aside class="plan-card">
+            <p class="eyebrow">PLAN SUMMARY</p>
+            <dl>
+              <div><dt>Supermarket</dt><dd id="summaryMarket">Lidl</dd></div>
+              <div><dt>Household</dt><dd id="summaryHousehold">2 people</dd></div>
+              <div><dt>Duration</dt><dd id="summaryDays">7 days</dd></div>
+              <div><dt>Meals covered</dt><dd id="summaryMeals">~14 meals</dd></div>
+            </dl>
+            <button class="save-button" id="saveButton" type="button">Save grocery list</button>
+          </aside>
+        </div>
+      </section>
+    </main>
+
+    <div class="toast" id="toast" role="status" aria-live="polite">Grocery list saved</div>
+    <script src="app.js"></script>
+  </body>
+</html>
