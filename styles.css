@@ -298,7 +298,7 @@ fieldset { border: 0; margin: 0; padding: 0; }
 .basket-item {
   min-height: 88px;
   display: grid;
-  grid-template-columns: 54px 1fr auto;
+  grid-template-columns: 54px 1fr auto 22px;
   align-items: center;
   gap: 12px;
   padding: 12px 15px;
@@ -321,6 +321,17 @@ fieldset { border: 0; margin: 0; padding: 0; }
 .item-name { font-size: 14px; font-weight: 700; }
 .item-meta { margin-top: 4px; color: #818982; font-size: 11px; }
 .item-price { font-size: 14px; font-weight: 800; }
+.basket-item input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--green);
+}
+.basket-item:has(input:checked) {
+  opacity: .58;
+}
+.basket-item:has(input:checked) .item-name {
+  text-decoration: line-through;
+}
 
 .plan-card {
   min-height: 260px;

@@ -38,30 +38,25 @@
 
   function buildBasket(budget, people, days, market) {
     const safeBudget = Math.max(0, Number(budget) || 0);
-    const safePeople = Math.max(1, Number(people) || 1);
-    const safeDays = Math.max(1, Number(days) || 1);
     const multiplier = marketMultipliers[market] || 1;
-    const targetServings = safePeople * safeDays * 1.5;
     const basket = [];
     let total = 0;
-    let servings = 0;
 
     const affordable = catalog
       .map((item) => ({ ...item, price: roundCurrency(item.price * multiplier) }))
       .sort((a, b) => b.servings / b.price - a.servings / a.price);
 
     for (const item of affordable) {
-      while (servings < targetServings && total + item.price <= safeBudget) {
+      if (basket.length < 12 && total + item.price <= safeBudget) {
         basket.push(item);
         total = roundCurrency(total + item.price);
-        servings += item.servings;
-        if (basket.length >= 24) break;
       }
-      if (basket.length >= 24) break;
+      if (basket.length >= 12) break;
     }
 
-    if (basket.length === 0 && safeBudget >= affordable[affordable.length - 1].price) {
-      const cheapest = affordable[affordable.length - 1];
+    if (basket.length === 0) {
+      const cheapest = affordable.reduce((lowest, item) => item.price < lowest.price ? item : lowest);
+      if (safeBudget < cheapest.price) return { items: [], total: 0, remaining: roundCurrency(safeBudget), percentage: 0 };
       basket.push(cheapest);
       total = cheapest.price;
     }
@@ -107,6 +102,7 @@
             <div class="item-meta">${item.category} · ${item.unit}</div>
           </div>
           <div class="item-price">${formatCurrency(item.price)}</div>
+          <input type="checkbox" aria-label="Mark ${item.name} as purchased" />
         </article>
       `).join("");
     }
@@ -150,6 +146,20 @@
     });
 
     document.getElementById("saveButton").addEventListener("click", () => {
+      const items = Array.from(basketList.querySelectorAll(".basket-item")).map((row) => ({
+        name: row.querySelector(".item-name").textContent,
+        purchased: row.querySelector("input").checked,
+      }));
+      try {
+        localStorage.setItem("korbo-grocery-list", JSON.stringify({
+          market: state.market,
+          people: state.people,
+          days: state.days,
+          items,
+        }));
+      } catch (_) {
+        // Saving is optional when browser storage is unavailable.
+      }
       const toast = document.getElementById("toast");
       toast.classList.add("show");
       window.setTimeout(() => toast.classList.remove("show"), 2200);
