@@ -31,6 +31,198 @@ button { cursor: pointer; }
   color: white;
 }
 
+.app-tabs {
+  display: flex;
+  align-self: stretch;
+  align-items: stretch;
+  gap: 4px;
+}
+
+.app-tab {
+  position: relative;
+  min-width: 92px;
+  border: 0;
+  background: transparent;
+  color: #cbd8d1;
+  font-weight: 700;
+}
+
+.app-tab.active {
+  color: white;
+}
+
+.app-tab.active::after {
+  content: "";
+  position: absolute;
+  right: 18px;
+  bottom: 0;
+  left: 18px;
+  height: 3px;
+  border-radius: 3px 3px 0 0;
+  background: var(--lime);
+}
+
+.saved-count {
+  min-width: 20px;
+  height: 20px;
+  display: inline-grid;
+  place-items: center;
+  margin-left: 4px;
+  border-radius: 10px;
+  background: rgba(255,255,255,.16);
+  font-size: 11px;
+}
+
+.saved-view {
+  max-width: 1180px;
+  min-height: 520px;
+  margin: 68px auto 90px;
+  padding: 0;
+}
+
+.saved-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.saved-heading h2 {
+  margin: 0;
+  font-family: "Manrope", sans-serif;
+  font-size: 36px;
+  letter-spacing: -1.8px;
+}
+
+.saved-heading .eyebrow { color: #758078; }
+
+.new-list-button,
+.empty-new-button {
+  height: 44px;
+  border: 0;
+  border-radius: 9px;
+  background: var(--lime);
+  color: var(--green-dark);
+  padding: 0 16px;
+  font-weight: 800;
+}
+
+.saved-list {
+  display: grid;
+  gap: 12px;
+}
+
+.saved-card {
+  min-height: 128px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 18px 20px;
+  border: 1px solid #e0e2d8;
+  border-radius: 14px;
+  background: var(--paper);
+}
+
+.saved-card-main {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.saved-basket-icon {
+  width: 72px;
+  height: 72px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  background: #edf1e7;
+  font-size: 36px;
+}
+
+.saved-card h3 {
+  margin: 0 0 4px;
+  font-family: "Manrope", sans-serif;
+  font-size: 18px;
+}
+
+.saved-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.saved-progress {
+  width: 260px;
+  margin-top: 12px;
+  color: #68756d;
+  font-size: 11px;
+}
+
+.saved-progress div {
+  height: 5px;
+  margin-top: 6px;
+  overflow: hidden;
+  border-radius: 5px;
+  background: #e3e5dc;
+}
+
+.saved-progress i {
+  height: 100%;
+  display: block;
+  border-radius: 5px;
+  background: var(--green);
+}
+
+.saved-card-actions {
+  display: grid;
+  grid-template-columns: auto auto;
+  align-items: center;
+  gap: 10px;
+}
+
+.saved-card-actions time {
+  grid-column: 1 / -1;
+  justify-self: end;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.open-list-button {
+  height: 42px;
+  border: 0;
+  border-radius: 8px;
+  background: var(--green);
+  color: white;
+  padding: 0 15px;
+  font-weight: 800;
+}
+
+.delete-list-button {
+  width: 42px;
+  height: 42px;
+  border: 1px solid #daddd2;
+  border-radius: 8px;
+  background: transparent;
+  color: #718077;
+  font-size: 22px;
+}
+
+.saved-empty {
+  min-height: 330px;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  border: 1px dashed #ccd1c4;
+  border-radius: 14px;
+  background: rgba(255,253,247,.55);
+  text-align: center;
+}
+
+.saved-empty > span { font-size: 48px; }
+.saved-empty h3 { margin: 12px 0 6px; font-family: "Manrope", sans-serif; }
+.saved-empty p { margin: 0 0 18px; color: var(--muted); }
+
 .brand {
   display: flex;
   align-items: center;
@@ -385,6 +577,9 @@ fieldset { border: 0; margin: 0; padding: 0; }
 
 @media (max-width: 650px) {
   .topbar { height: 64px; padding: 0 18px; }
+  .app-tabs { margin-left: auto; }
+  .app-tab { min-width: 74px; padding: 0 8px; font-size: 12px; }
+  .profile-button { display: none; }
   .hero { min-height: 220px; padding: 38px 24px 72px; display: block; }
   .hero h1 { font-size: 46px; }
   .hero-copy { width: auto; margin: 18px 0 0; }
@@ -401,6 +596,12 @@ fieldset { border: 0; margin: 0; padding: 0; }
   .basket-layout { grid-template-columns: 1fr; }
   .basket-list { grid-template-columns: 1fr; }
   .plan-card { min-height: 0; }
+  .saved-view { width: calc(100% - 24px); margin-top: 48px; }
+  .saved-heading h2 { font-size: 28px; }
+  .saved-card { align-items: flex-start; }
+  .saved-basket-icon { width: 54px; height: 54px; font-size: 28px; }
+  .saved-progress { width: 180px; }
+  .saved-card-actions { flex-shrink: 0; }
 }
 
 @media (max-width: 380px) {
