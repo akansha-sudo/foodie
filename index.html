@@ -18,12 +18,17 @@
         </span>
         <span>korbo</span>
       </a>
-      <button class="profile-button" type="button" aria-label="Open profile">
-        <span>AK</span>
-      </button>
+      <nav class="app-tabs" aria-label="App sections">
+        <button class="app-tab active" type="button" data-view="planner" aria-current="page">Plan</button>
+        <button class="app-tab" type="button" data-view="saved">
+          My lists <span class="saved-count" id="savedCount">0</span>
+        </button>
+      </nav>
+      <button class="profile-button" type="button" aria-label="Open profile"><span>AK</span></button>
     </header>
 
     <main>
+      <div id="plannerView">
       <section class="hero">
         <div>
           <p class="eyebrow">WEEKLY GROCERY PLAN</p>
@@ -122,6 +127,18 @@
             <button class="save-button" id="saveButton" type="button">Save grocery list</button>
           </aside>
         </div>
+      </section>
+      </div>
+
+      <section class="saved-view" id="savedView" hidden aria-label="Saved grocery lists">
+        <div class="saved-heading">
+          <div>
+            <p class="eyebrow">YOUR COLLECTION</p>
+            <h2>My grocery lists</h2>
+          </div>
+          <button class="new-list-button" id="newListButton" type="button">+ New plan</button>
+        </div>
+        <div class="saved-list" id="savedList"></div>
       </section>
     </main>
 
